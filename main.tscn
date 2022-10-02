@@ -1,0 +1,122 @@
+[gd_scene load_steps=19 format=3 uid="uid://cv3n1j0mwpr8c"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_dl386"]
+[ext_resource type="PackedScene" uid="uid://nqdknf7b5a8f" path="res://Assets/Spikes.tscn" id="2_43f2y"]
+[ext_resource type="PackedScene" uid="uid://cm7a8ooa1sv2f" path="res://Assets/Player.tscn" id="2_260lv"]
+[ext_resource type="PackedScene" uid="uid://bs52qsev1ymwd" path="res://Assets/Coin.tscn" id="4_rf1a7"]
+[ext_resource type="Texture2D" uid="uid://c6qfwg0i1nqea" path="res://Assets/Ground.png" id="4_wrgeb"]
+[ext_resource type="Texture2D" uid="uid://xdcg72wgtf7x" path="res://Assets/Sky.png" id="5_qfnwn"]
+[ext_resource type="PackedScene" uid="uid://br2bhnu3la14o" path="res://Assets/Chocolate.tscn" id="5_s2seh"]
+[ext_resource type="Script" path="res://HUD.gd" id="6_21ltv"]
+[ext_resource type="FontFile" uid="uid://batuxnm66e2q" path="res://Assets/PeaberryBase.ttf" id="6_af4g6"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_q6emf"]
+friction = 0.0
+bounce = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qbkp8"]
+size = Vector2(5, 245)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lcvif"]
+size = Vector2(141, 5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qxdfw"]
+size = Vector2(5, 245.5)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0gym2"]
+friction = 0.0
+bounce = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pnrb2"]
+size = Vector2(134.75, 27.5)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ywdt0"]
+font_size = 32
+
+[sub_resource type="Animation" id="Animation_b8hq4"]
+resource_name = "BounceScore"
+length = 0.15
+step = 0.075
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ScoreLabel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.075, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 26), Vector2(0, 20), Vector2(0, 26)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e5fj7"]
+_data = {
+"BounceScore": SubResource("Animation_b8hq4")
+}
+
+[node name="Node" type="Node"]
+script = ExtResource("1_dl386")
+spike_scene = ExtResource("2_43f2y")
+player_scene = ExtResource("2_260lv")
+coin_scene = ExtResource("4_rf1a7")
+chocolate_scene = ExtResource("5_s2seh")
+
+[node name="Sky" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(68, 120)
+texture = ExtResource("5_qfnwn")
+
+[node name="Walls" type="StaticBody2D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_q6emf")
+
+[node name="CollisionShape2d" type="CollisionShape2D" parent="Walls"]
+position = Vector2(-2.5, 117.5)
+shape = SubResource("RectangleShape2D_qbkp8")
+
+[node name="CollisionShape2d2" type="CollisionShape2D" parent="Walls"]
+position = Vector2(70.5, -2.5)
+shape = SubResource("RectangleShape2D_lcvif")
+
+[node name="CollisionShape2d3" type="CollisionShape2D" parent="Walls"]
+position = Vector2(138, 122.25)
+shape = SubResource("RectangleShape2D_qxdfw")
+
+[node name="Floor" type="StaticBody2D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_0gym2")
+
+[node name="CollisionShape2d4" type="CollisionShape2D" parent="Floor"]
+position = Vector2(67.625, 225.75)
+shape = SubResource("RectangleShape2D_pnrb2")
+
+[node name="Sprite2d" type="Sprite2D" parent="Floor"]
+texture_filter = 1
+position = Vector2(68, 226)
+texture = ExtResource("4_wrgeb")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("6_21ltv")
+
+[node name="ScoreLabel" type="Label" parent="HUD"]
+texture_filter = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.175
+offset_top = 26.0
+offset_bottom = 36.9999
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("6_af4g6")
+text = "0
+"
+label_settings = SubResource("LabelSettings_ywdt0")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD"]
+libraries = {
+"": SubResource("AnimationLibrary_e5fj7")
+}
+
+[node name="Camera2d" type="Camera2D" parent="."]
+position = Vector2(68, 120)
+current = true

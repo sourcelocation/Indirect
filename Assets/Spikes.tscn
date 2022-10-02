@@ -1,0 +1,127 @@
+[gd_scene load_steps=21 format=3 uid="uid://nqdknf7b5a8f"]
+
+[ext_resource type="Script" path="res://Assets/Spikes.gd" id="1_gqggq"]
+[ext_resource type="Texture2D" uid="uid://demyy0hkigtmk" path="res://Assets/Spikes/Spikes_1.png" id="2_5ird7"]
+[ext_resource type="Texture2D" uid="uid://dw0luvd7if7bh" path="res://Assets/Spikes/Spikes_8.png" id="2_atjee"]
+[ext_resource type="Texture2D" uid="uid://dq10wukch111y" path="res://Assets/Spikes/Spikes_5.png" id="2_yrcrh"]
+[ext_resource type="Texture2D" uid="uid://c47h3bouadmeb" path="res://Assets/Spikes/Spikes_9.png" id="3_8u11k"]
+[ext_resource type="Texture2D" uid="uid://dns0gw0jola56" path="res://Assets/Spikes/Spikes_7.png" id="3_aq3h6"]
+[ext_resource type="Texture2D" uid="uid://deqxnwlhqlodw" path="res://Assets/Spikes/Spikes_2.png" id="3_dp5hu"]
+[ext_resource type="Texture2D" uid="uid://bmn70sotskm13" path="res://Assets/Spikes/Spikes_3.png" id="4_275p8"]
+[ext_resource type="Texture2D" uid="uid://sksfawrwk7ij" path="res://Assets/Spikes/Spikes_4.png" id="5_tjq0g"]
+[ext_resource type="Texture2D" uid="uid://cp6rgaxf2nq50" path="res://Assets/Spikes/Spikes_6.png" id="7_eb1lu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a73tc"]
+size = Vector2(6, 8)
+
+[sub_resource type="Animation" id="Animation_gd2ju"]
+resource_name = "Appear"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2d:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_5ird7"), ExtResource("3_dp5hu"), ExtResource("4_275p8"), ExtResource("5_tjq0g"), ExtResource("2_yrcrh"), ExtResource("7_eb1lu"), ExtResource("3_aq3h6"), ExtResource("2_atjee"), ExtResource("3_8u11k")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2d:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 9), Vector2(0, 9), Vector2(0, 0)]
+}
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fgu0r"]
+load_path = "res://.godot/imported/Spikes_7.png-f31c7710ddbeed3042cc7c1cba50cc88.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_j24tl"]
+load_path = "res://.godot/imported/Spikes_6.png-51ea2a93fa7a51bb32b474c4d8d19bcd.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_pl8xy"]
+load_path = "res://.godot/imported/Spikes_4.png-2f17e1f76608be555495f52ebe9e6bca.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_utcwi"]
+load_path = "res://.godot/imported/Spikes_3.png-e5b3692daba7da8e17552e965812c8ab.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_et37b"]
+load_path = "res://.godot/imported/Spikes_2.png-d450f299a3c1b84955180ae1e8b1999c.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4wsl5"]
+load_path = "res://.godot/imported/Spikes_1.png-26eb8ae4629e4d7726ce2d9d21451f4b.ctex"
+
+[sub_resource type="Animation" id="Animation_uq8a8"]
+resource_name = "Disappear"
+length = 0.3
+step = 0.033
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2d:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033, 0.066, 0.099, 0.132, 0.165, 0.198, 0.231, 0.264),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("3_8u11k"), ExtResource("2_atjee"), SubResource("CompressedTexture2D_fgu0r"), SubResource("CompressedTexture2D_j24tl"), ExtResource("2_yrcrh"), SubResource("CompressedTexture2D_pl8xy"), SubResource("CompressedTexture2D_utcwi"), SubResource("CompressedTexture2D_et37b"), SubResource("CompressedTexture2D_4wsl5")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2d:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.165, 0.264),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(0, 10)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.297),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rahlj"]
+_data = {
+"Appear": SubResource("Animation_gd2ju"),
+"Disappear": SubResource("Animation_uq8a8")
+}
+
+[node name="Spikes" type="Area2D" groups=["Spikes"]]
+script = ExtResource("1_gqggq")
+
+[node name="CollisionShape2d" type="CollisionShape2D" parent="."]
+position = Vector2(0, 10)
+shape = SubResource("RectangleShape2D_a73tc")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_rahlj")
+}
+
+[node name="Sprite2d" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = SubResource("CompressedTexture2D_4wsl5")

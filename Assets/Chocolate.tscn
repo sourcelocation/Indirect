@@ -1,0 +1,122 @@
+[gd_scene load_steps=9 format=3 uid="uid://br2bhnu3la14o"]
+
+[ext_resource type="Texture2D" uid="uid://dg4urbdctaxmu" path="res://Assets/Chocolate/Chocolate_3.png" id="1_ksnuy"]
+[ext_resource type="Texture2D" uid="uid://cfe6jnnsa3qis" path="res://Assets/Chocolate/Chocolate_1.png" id="2_46xvo"]
+[ext_resource type="Texture2D" uid="uid://c45k2c7guxwm8" path="res://Assets/Chocolate/Chocolate_2.png" id="3_n6dpv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m3ppq"]
+size = Vector2(20, 10)
+
+[sub_resource type="Animation" id="Animation_bdh4y"]
+resource_name = "Appear"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2d:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_46xvo"), ExtResource("3_n6dpv"), ExtResource("1_ksnuy")]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["Idle"],
+"method": &"play"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_qtbhu"]
+resource_name = "Idle"
+length = 0.61
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2d:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1e-05, 1e-05, 1e-05),
+"update": 0,
+"values": [Vector2(0, -1), Vector2(0, 0), Vector2(0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_k3bgo"]
+resource_name = "Disappear"
+length = 0.15
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2d:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("1_ksnuy"), ExtResource("3_n6dpv"), ExtResource("2_46xvo")]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2d")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.15),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2kdx7"]
+_data = {
+"Appear": SubResource("Animation_bdh4y"),
+"Disappear": SubResource("Animation_k3bgo"),
+"Idle": SubResource("Animation_qtbhu")
+}
+
+[node name="Chocolate" type="Area2D" groups=["Chocolate"]]
+
+[node name="Sprite2d" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -1)
+texture = ExtResource("2_46xvo")
+
+[node name="CollisionShape2d" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_m3ppq")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2kdx7")
+}
