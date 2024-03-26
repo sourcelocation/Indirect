@@ -23,7 +23,15 @@ func _process(delta):
 func _on_player_hit_ground():
 	_remove_spikes()
 	_remove_chocolates()
-	for n in min(score / 15 + 1, 2):
+	
+	# troll for cheaters
+	if score < 0:
+		for n in 100:
+			$HUD.show_cheater_message()
+			_create_spike()
+	
+	
+	for n in min(abs(score) / 15 + 1, 2):
 		_create_spike()
 	
 	
@@ -39,7 +47,7 @@ func _on_player_hit_ground():
 		add_child(coin)
 		
 	
-	if get_tree().get_nodes_in_group("Chocolate").size() <= 0 and randi_range(0,10) == 0:
+	if get_tree().get_nodes_in_group("Chocolate").size() <= 0 and randi_range(0,7) == 0:
 		var chocolate = chocolate_scene.instantiate()
 		chocolate.position = Vector2(10 + 115 * randf(), 80 + 100 * randf())
 		chocolate.body_entered.connect(_on_Chocolate_body_entered.bind(chocolate))
@@ -48,7 +56,8 @@ func _on_player_hit_ground():
 
 func _on_Spikes_body_entered(body):
 	if body.is_in_group("Player"):
-		_reset_game()
+		_game_over()
+#		_reset_game()
 		
 func _on_Coin_body_entered(body, coin):
 	if body.is_in_group("Player"):
@@ -82,6 +91,11 @@ func _remove_chocolates():
 	for chocolate in get_tree().get_nodes_in_group("Chocolate"):
 		chocolate.get_node("AnimationPlayer").play("Disappear")
 
+func _game_over():
+	$HUD.game_over()
+	for player in get_tree().get_nodes_in_group("Player"):
+		player.destroy()
+	
 func _reset_game():
 	for player in get_tree().get_nodes_in_group("Player"):
 		player.destroy()

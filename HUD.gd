@@ -15,3 +15,9 @@ func _process(delta):
 func update_score(score):
 	$ScoreLabel.text = str(score)
 	$AnimationPlayer.play("BounceScore")
+
+func game_over():
+	$AnimationPlayer.play("GameOver")
+
+func show_cheater_message():
+	$HighscoreLabel.text = "We know what you're doing..."
